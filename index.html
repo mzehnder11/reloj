@@ -48,29 +48,41 @@
             </div>
         </section>
 
-        <!-- Page 2: Weather -->
-        <section class="page" id="page-weather">
-            <div class="weather-container">
-                <div class="weather-header">
-                    <h2 id="weather-location">Solothurn</h2>
-                    <div class="current-weather">
-                        <div class="temp-big" id="current-temp">--°</div>
-                        <div class="condition-icon" id="current-icon"></div>
+        <!-- Page 2: Info (Calendar + World Clocks) -->
+        <section class="page" id="page-info">
+            <div class="info-container">
+                <!-- Calendar -->
+                <div class="calendar-section">
+                    <div class="calendar-header">
+                        <span id="calendar-month">Februar 2026</span>
                     </div>
-                    <div id="weather-summary" class="weather-summary">--</div>
+                    <div class="calendar-grid">
+                        <div class="calendar-weekdays">
+                            <span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span>
+                        </div>
+                        <div class="calendar-days" id="calendar-days">
+                            <!-- Days injected by JS -->
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Horizontal Hourly Forecast -->
-                <div class="hourly-container">
-                    <div class="hourly-list" id="hourly-list">
-                        <!-- Hourly data injected here -->
+                <!-- World Clocks -->
+                <div class="worldclock-section">
+                    <div class="worldclock-item">
+                        <span class="city-name">San Juan</span>
+                        <span class="city-time" id="time-sanjuan">--:--</span>
                     </div>
-                </div>
-
-                <!-- Vertical Daily Forecast -->
-                <div class="forecast-container">
-                    <div class="forecast-list" id="forecast-list">
-                        <!-- Daily data injected here -->
+                    <div class="worldclock-item">
+                        <span class="city-name">New York</span>
+                        <span class="city-time" id="time-newyork">--:--</span>
+                    </div>
+                    <div class="worldclock-item">
+                        <span class="city-name">Los Angeles</span>
+                        <span class="city-time" id="time-losangeles">--:--</span>
+                    </div>
+                    <div class="worldclock-item">
+                        <span class="city-name">Dubai</span>
+                        <span class="city-time" id="time-dubai">--:--</span>
                     </div>
                 </div>
             </div>

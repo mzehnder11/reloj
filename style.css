@@ -331,29 +331,9 @@ html {
     transform: rotate(330deg);
 }
 
-/* --- Weather Page Styles (Minimalist) --- */
-.weather-container {
-    width: 90%;
-    max-width: 900px;
-    height: 90vh;
-    /* Fill high enough */
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
-    text-align: center;
-    color: white;
-}
-
-.weather-header h2 {
-    font-size: 2.5rem;
-    font-weight: 300;
-    margin: 0;
-}
-
-.current-weather {
+/* --- Info Page Styles (Calendar + World Clocks) --- */
+#page-info {
+    background-color: #000000;
     display: -webkit-flex;
     display: flex;
     -webkit-justify-content: center;
@@ -362,111 +342,131 @@ html {
     align-items: center;
 }
 
-.temp-big {
-    font-size: 10vw;
-    font-weight: 200;
-}
-
-.condition-icon {
-    font-size: 5vw;
-    margin-left: 20px;
-}
-
-.weather-summary {
-    font-size: 1.5rem;
-    font-weight: 300;
-    opacity: 0.8;
-}
-
-/* Horizontal Hourly */
-.hourly-container {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin: 20px 0;
-    scrollbar-width: none;
-}
-
-.hourly-container::-webkit-scrollbar {
-    display: none;
-}
-
-.hourly-list {
-    display: -webkit-flex;
-    display: flex;
-    padding-bottom: 10px;
-}
-
-.hourly-item {
-    -webkit-flex: 0 0 80px;
-    flex: 0 0 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.hourly-time {
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.hourly-icon {
-    font-size: 1.5rem;
-    margin: 5px 0;
-}
-
-.hourly-temp {
-    font-weight: 300;
-}
-
-/* Vertical Daily */
-.forecast-container {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 10px;
-}
-
-.forecast-list {
+.info-container {
+    width: 95%;
+    max-width: 1200px;
+    height: 95vh;
+    padding: 2vh 0;
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
     flex-direction: column;
-}
-
-.forecast-item {
-    display: -webkit-flex;
-    display: flex;
     -webkit-justify-content: space-between;
     justify-content: space-between;
+    color: white;
+    box-sizing: border-box;
+}
+
+/* Calendar Section */
+.calendar-section {
+    -webkit-flex: 1;
+    flex: 1;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.calendar-header {
+    text-align: center;
+    font-size: 4vw;
+    font-weight: 300;
+    margin-bottom: 3vh;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.calendar-grid {
+    width: 100%;
+}
+
+.calendar-weekdays {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    margin-bottom: 2vh;
+    opacity: 0.5;
+    font-size: 2vw;
+    font-weight: 600;
+}
+
+.calendar-weekdays span {
+    width: 14.28%;
+    text-align: center;
+}
+
+.calendar-days {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.calendar-day {
+    width: 14.28%;
+    text-align: center;
+    padding: 1.5vh 0;
+    font-size: 3vw;
+    font-weight: 300;
+    box-sizing: border-box;
+}
+
+.calendar-day.empty {
+    visibility: hidden;
+}
+
+.calendar-day.today {
+    background: white;
+    color: black;
+    border-radius: 50%;
+    font-weight: 700;
+}
+
+.calendar-day.weekend {
+    opacity: 0.5;
+}
+
+/* World Clocks Section */
+.worldclock-section {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
     -webkit-align-items: center;
     align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 1.2rem;
+    padding-top: 3vh;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
 }
 
-.forecast-item:last-child {
-    border-bottom: none;
+.worldclock-item {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 1vh 2vw;
 }
 
-.forecast-day {
-    width: 60px;
-    text-align: left;
+.city-name {
+    font-size: 1.5vw;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    margin-bottom: 1vh;
 }
 
-.forecast-icon {
-    flex: 1;
-    text-align: center;
-    font-size: 1.5rem;
-}
-
-.forecast-temp {
-    width: 80px;
-    text-align: right;
-}
-
-.forecast-low {
-    opacity: 0.5;
-    margin-left: 5px;
+.city-time {
+    font-size: 4vw;
+    font-weight: 200;
 }
 
 
