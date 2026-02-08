@@ -1,0 +1,570 @@
+/* Global Styles */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* Scroll Container for snap scrolling */
+.scroll-container {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    /* Required for snap on iOS */
+
+    /* Modern Snap */
+    scroll-snap-type: y mandatory;
+
+    /* iOS 9/10 Legacy Snap */
+    -webkit-scroll-snap-type: mandatory;
+    -webkit-scroll-snap-points-y: repeat(100vh);
+    -webkit-scroll-snap-destination: 0px 0px;
+
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+/* Individual Pages */
+.page {
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Page 1: Clock */
+#page-clock {
+    background-color: #000000;
+}
+
+/* Page 2: Weather - Minimalist Black */
+#page-weather {
+    background-color: #000000;
+    /* Flat black per request */
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+/* Container for split screen layout (Clock) */
+.container {
+    display: -webkit-flex;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    /* Default: Landscape (iPad Mini optimized) */
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+/* Each section takes up 50% width normally */
+.clock-section {
+    -webkit-flex: 1;
+    flex: 1;
+    height: 100%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    /* Stack date below time */
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* --- Digital Clock Styles --- */
+.digital-clock-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: baseline;
+    align-items: baseline;
+    /* Align seconds with bottom of hours */
+    -webkit-justify-content: center;
+    justify-content: center;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+#digital-time-main {
+    font-size: 14vw;
+}
+
+.seconds-display {
+    font-size: 6vw;
+    /* Smaller seconds */
+    opacity: 0.5;
+    /* Less prominent */
+    margin-left: 0.5rem;
+    font-weight: 400;
+}
+
+.date-display {
+    font-size: 2.5vw;
+    /* Responsive date size */
+    margin-top: 1rem;
+    font-weight: 400;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-align: center;
+}
+
+
+/* --- Analog Clock Styles --- */
+.analog-clock {
+    width: 38vw;
+    height: 38vw;
+    max-width: 500px;
+    max-height: 500px;
+    border: 6px solid #e0e0e0;
+    /* Slightly thicker, cleaner border */
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+    /* Subtle glow */
+    background: radial-gradient(circle, #1a1a1a 0%, #000000 70%);
+    /* Depth */
+    background: -webkit-radial-gradient(circle, #1a1a1a 0%, #000000 70%);
+}
+
+/* Center Dot */
+.center-dot {
+    width: 16px;
+    height: 16px;
+    background-color: #ff3b30;
+    /* Red center matches second hand often */
+    border: 2px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 20;
+}
+
+/* Clock Hands */
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    -webkit-transform-origin: bottom center;
+    transform-origin: bottom center;
+    border-radius: 4px 4px 0 0;
+    z-index: 10;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Shadow for depth */
+}
+
+.hour-hand {
+    width: 10px;
+    height: 28%;
+    margin-left: -5px;
+    background-color: #ffffff;
+    z-index: 11;
+}
+
+.minute-hand {
+    width: 6px;
+    height: 42%;
+    margin-left: -3px;
+    background-color: #e0e0e0;
+    /* Slightly distinct */
+    z-index: 12;
+}
+
+.second-hand {
+    width: 2px;
+    height: 46%;
+    /* Longest */
+    background-color: #ff3b30;
+    margin-left: -1px;
+    z-index: 13;
+    border-radius: 2px;
+}
+
+/* Second hand tail */
+.second-hand::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 20px;
+    background-color: #ff3b30;
+    bottom: -15px;
+    /* Extend backwards */
+    left: -1px;
+    border-radius: 2px;
+}
+
+/* Markers */
+/* Container approach: 
+   Each marker div is full height (100%) and centered.
+   We rotate the whole div.
+   The tick itself is a pseudo-element at the top.
+*/
+.marker {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 6px;
+    height: 100%;
+    /* Spans full diameter effectively if centered properly? No, top 0 height 100% relative to clock. */
+    margin-left: -3px;
+    /* Center horizontally */
+    pointer-events: none;
+}
+
+/* The actual tick marks */
+.marker::after {
+    content: '';
+    display: block;
+    width: 100%;
+    background-color: #666;
+    /* Subtle grey for normal ticks */
+    height: 15px;
+    /* Length of tick */
+}
+
+/* Highlights for 12, 3, 6, 9 */
+.marker-12::after,
+.marker-3::after,
+.marker-6::after,
+.marker-9::after {
+    background-color: #ffffff;
+    /* Bright white for main hours */
+    height: 25px;
+    /* Longer */
+    width: 8px;
+    /* Thicker */
+    margin-left: -1px;
+    /* Adjust for thickness change if needed, or just let it center */
+}
+
+/* 
+   Rotation classes (standard clock positions)
+   12 is 0deg, 1 is 30deg, etc.
+*/
+.marker-12 {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+.marker-1 {
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+
+.marker-2 {
+    -webkit-transform: rotate(60deg);
+    transform: rotate(60deg);
+}
+
+.marker-3 {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.marker-4 {
+    -webkit-transform: rotate(120deg);
+    transform: rotate(120deg);
+}
+
+.marker-5 {
+    -webkit-transform: rotate(150deg);
+    transform: rotate(150deg);
+}
+
+.marker-6 {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.marker-7 {
+    -webkit-transform: rotate(210deg);
+    transform: rotate(210deg);
+}
+
+.marker-8 {
+    -webkit-transform: rotate(240deg);
+    transform: rotate(240deg);
+}
+
+.marker-9 {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+.marker-10 {
+    -webkit-transform: rotate(300deg);
+    transform: rotate(300deg);
+}
+
+.marker-11 {
+    -webkit-transform: rotate(330deg);
+    transform: rotate(330deg);
+}
+
+/* --- Weather Page Styles (Minimalist) --- */
+.weather-container {
+    width: 90%;
+    max-width: 900px;
+    height: 90vh;
+    /* Fill high enough */
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    text-align: center;
+    color: white;
+}
+
+.weather-header h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin: 0;
+}
+
+.current-weather {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.temp-big {
+    font-size: 10vw;
+    font-weight: 200;
+}
+
+.condition-icon {
+    font-size: 5vw;
+    margin-left: 20px;
+}
+
+.weather-summary {
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* Horizontal Hourly */
+.hourly-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 20px 0;
+    scrollbar-width: none;
+}
+
+.hourly-container::-webkit-scrollbar {
+    display: none;
+}
+
+.hourly-list {
+    display: -webkit-flex;
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.hourly-item {
+    -webkit-flex: 0 0 80px;
+    flex: 0 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hourly-time {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.hourly-icon {
+    font-size: 1.5rem;
+    margin: 5px 0;
+}
+
+.hourly-temp {
+    font-weight: 300;
+}
+
+/* Vertical Daily */
+.forecast-container {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 10px;
+}
+
+.forecast-list {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.forecast-item {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.2rem;
+}
+
+.forecast-item:last-child {
+    border-bottom: none;
+}
+
+.forecast-day {
+    width: 60px;
+    text-align: left;
+}
+
+.forecast-icon {
+    flex: 1;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.forecast-temp {
+    width: 80px;
+    text-align: right;
+}
+
+.forecast-low {
+    opacity: 0.5;
+    margin-left: 5px;
+}
+
+
+/* --- Responsive Adjustments --- */
+
+/* Portrait / Mobile Phones */
+@media (max-width: 768px) and (orientation: portrait) {
+    .container {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        -webkit-justify-content: space-evenly;
+        justify-content: space-evenly;
+    }
+
+    .clock-section {
+        -webkit-flex: 0 0 auto;
+        flex: 0 0 auto;
+        /* Don't stretch infinitely */
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .digital-section {
+        -webkit-order: 1;
+        order: 1;
+        /* Digital top */
+    }
+
+    .analog-section {
+        -webkit-order: 2;
+        order: 2;
+        /* Analog bottom */
+    }
+
+    #digital-time-main {
+        font-size: 20vw;
+    }
+
+    .seconds-display {
+        font-size: 8vw;
+    }
+
+    .date-display {
+        font-size: 5vw;
+    }
+
+    .analog-clock {
+        width: 70vw;
+        height: 70vw;
+    }
+
+    .weather-container {
+        height: 95vh;
+    }
+
+    .temp-big {
+        font-size: 7rem;
+    }
+
+    .forecast-list {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .forecast-item {
+        font-size: 1.2rem;
+        padding: 10px 0;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .forecast-item:last-child {
+        border-bottom: none;
+    }
+}
+
+/* Small landscape devices (unlikely for iPad Mini but good for phones) */
+@media (max-width: 900px) and (max-height: 500px) {
+    #digital-time-main {
+        font-size: 12vw;
+    }
+
+    .seconds-display {
+        font-size: 5vw;
+    }
+
+    .clock-section {
+        padding: 10px;
+    }
+
+    .temp-big {
+        font-size: 5rem;
+    }
+
+    .weather-container {
+        height: 85vh;
+        margin-top: 10px;
+    }
+}

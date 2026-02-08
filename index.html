@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>iPad Mini Uhr & Wetter</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main class="scroll-container" id="main-scroll">
+        <!-- Page 1: Clock (Existing) -->
+        <section class="page" id="page-clock">
+            <div class="container clock-layout">
+                <div class="clock-section digital-section">
+                    <div class="digital-clock-container">
+                        <span id="digital-time-main">00:00</span><span id="digital-time-seconds"
+                            class="seconds-display">:00</span>
+                    </div>
+                    <div id="date-display" class="date-display">Montag, 1. Januar</div>
+                </div>
+                <div class="clock-section analog-section">
+                    <div class="analog-clock">
+                        <div class="hand hour-hand" id="hour-hand"></div>
+                        <div class="hand minute-hand" id="minute-hand"></div>
+                        <div class="hand second-hand" id="second-hand"></div>
+                        <div class="center-dot"></div>
+
+                        <!-- Zifferblatt Markierungen -->
+                        <div class="marker marker-1"></div>
+                        <div class="marker marker-2"></div>
+                        <div class="marker marker-3"></div>
+                        <div class="marker marker-4"></div>
+                        <div class="marker marker-5"></div>
+                        <div class="marker marker-6"></div>
+                        <div class="marker marker-7"></div>
+                        <div class="marker marker-8"></div>
+                        <div class="marker marker-9"></div>
+                        <div class="marker marker-10"></div>
+                        <div class="marker marker-11"></div>
+                        <div class="marker marker-12"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 2: Weather -->
+        <section class="page" id="page-weather">
+            <div class="weather-container">
+                <div class="weather-header">
+                    <h2 id="weather-location">Solothurn</h2>
+                    <div class="current-weather">
+                        <div class="temp-big" id="current-temp">--°</div>
+                        <div class="condition-icon" id="current-icon"></div>
+                    </div>
+                    <div id="weather-summary" class="weather-summary">--</div>
+                </div>
+
+                <!-- Horizontal Hourly Forecast -->
+                <div class="hourly-container">
+                    <div class="hourly-list" id="hourly-list">
+                        <!-- Hourly data injected here -->
+                    </div>
+                </div>
+
+                <!-- Vertical Daily Forecast -->
+                <div class="forecast-container">
+                    <div class="forecast-list" id="forecast-list">
+                        <!-- Daily data injected here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
